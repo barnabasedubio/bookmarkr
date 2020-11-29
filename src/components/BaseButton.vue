@@ -1,9 +1,15 @@
 <template>
-    <button>BaseButton</button>
+    <button>
+        <slot></slot>
+    </button>
 </template>
 
 <script>
 export default {};
 </script>
 
-<style scoped></style>
+<style scoped>
+button {
+    padding: 0.5rem 1.5rem;
+}
+</style>
