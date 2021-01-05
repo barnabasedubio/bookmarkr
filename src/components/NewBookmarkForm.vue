@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import generateID from "../tools/generateID.js"
+import generateID from "../tools/generateID.js";
 export default {
     emits: ["event-new-bookmark"],
     data() {

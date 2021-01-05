@@ -1,10 +1,21 @@
 <template>
     <the-header></the-header>
-    <menu-bar></menu-bar>
+
+    <menu-bar
+        @event-show-saved-bookmarks="setActiveTab('bookmark-item-list')"
+        @event-show-new-bookmark="setActiveTab('new-bookmark-form')"
+    ></menu-bar>
+
     <new-bookmark-form
+        v-if="selectedComponent === 'new-bookmark-form'"
         @event-new-bookmark="addNewBookmarkItem"
     ></new-bookmark-form>
-    <bookmark-item-list :bookmark-items="bookMarkList"></bookmark-item-list>
+
+    <bookmark-item-list
+        v-if="selectedComponent === 'bookmark-item-list'"
+        :bookmark-items="bookMarkList"
+    ></bookmark-item-list>
+
     <the-footer></the-footer>
 </template>
 
@@ -25,13 +36,18 @@ export default {
     },
     data() {
         return {
-            bookMarkList: []
+            bookMarkList: [],
+            selectedComponent: "bookmark-item-list"
         };
     },
     methods: {
         addNewBookmarkItem(newBookmarkItemObject) {
             console.log(newBookmarkItemObject);
             this.bookMarkList.push(newBookmarkItemObject);
+            this.selectedComponent = "bookmark-item-list";
+        },
+        setActiveTab(activeTab) {
+            this.selectedComponent = activeTab;
         }
     }
 };
