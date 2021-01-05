@@ -4,7 +4,7 @@
             <bookmark-item :bookmark-item="item"></bookmark-item>
         </li>
     </ul>
-    <h2 v-else>Add a Bookmark</h2>
+    <p class="empty-bookmark-list-text" v-else>Your bookmark list is empty. Add a new bookmark!</p>
 </template>
 
 <script>
@@ -20,5 +20,8 @@
 </script>
 
 <style scoped>
-
+.empty-bookmark-list-text {
+    position: relative;
+    top: 10rem;
+}
 </style>

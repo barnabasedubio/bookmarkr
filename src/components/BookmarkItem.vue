@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="bookmark-item">
         <h3>{{ bookmarkItem.bookmarkItemTitle }}</h3>
         <p>{{ bookmarkItem.bookmarkItemDescription }}</p>
         <p>{{ bookmarkItem.bookmarkItemLink }}</p>
