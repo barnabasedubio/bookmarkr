@@ -1,18 +1,13 @@
 <template>
     <div class="new-input-form">
-        <input type="text" placeholder="title" v-model="bookmarkItemTitle" />
+        <input type="text" placeholder="Title" v-model="bookmarkItemTitle" />
         <textarea
-            type="text"
-            placeholder="description"
+            placeholder="Description"
             v-model="bookmarkItemDescription"
         ></textarea>
-        <input
-            type="text"
-            placeholder="link"
-            v-model="bookmarkItemLink"
-        />
+        <input type="text" placeholder="Link" v-model="bookmarkItemLink" />
 
-        <base-button @click="saveNewBookmark">
+        <base-button class="save-button" @click="saveNewBookmark">
             Save
         </base-button>
     </div>
@@ -29,6 +24,16 @@ export default {
             bookmarkItemLink: ""
         };
     },
+    computed: {
+        bookmarkItemLinkCleaned() {
+            if (this.bookmarkItemLink) {
+                if (this.bookmarkItemLink.startsWith("http"))
+                    return this.bookmarkItemLink;
+                else return "https://" + this.bookmarkItemLink;
+            }
+            return "";
+        }
+    },
     methods: {
         saveNewBookmark() {
             const UID = generateID();
@@ -36,7 +41,7 @@ export default {
                 id: UID,
                 bookmarkItemTitle: this.bookmarkItemTitle,
                 bookmarkItemDescription: this.bookmarkItemDescription,
-                bookmarkItemLink: this.bookmarkItemLink
+                bookmarkItemLink: this.bookmarkItemLinkCleaned
             };
 
             this.$emit("event-new-bookmark", newBookmarkItemObject);
@@ -46,8 +51,17 @@ export default {
 </script>
 
 <style scoped>
+.new-input-form {
+    background-color: white;
+    border: 1px solid #12232e;
+    width: 40%;
+    margin: 0 auto;
+    padding: 1rem 3rem;
+    border-radius: 10px;
+}
+
 input {
-    width: 30%;
+    width: 100%;
     display: block;
     margin: 0 auto;
     height: 2rem;
@@ -57,7 +71,7 @@ input {
 }
 
 textarea {
-    width: 30%;
+    width: 100%;
     height: 5rem;
     border: 1px solid black;
     border-radius: 5px;
@@ -65,7 +79,12 @@ textarea {
     resize: none;
 }
 
-input,textarea {
+input,
+textarea {
+    margin-top: 2rem;
+}
+
+.save-button {
     margin-top: 2rem;
 }
 </style>
